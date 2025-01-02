@@ -53,6 +53,27 @@ class Catigory {
         }
     }
 
-    
+    public function deleteCategory()
+    {
+        $query = "DELETE FROM catigory WHERE catigorYid = :catigorYid";
+
+        try {
+            // Get user input
+            $catigorYid = $_POST["catigorYid"];
+
+            $stmt = $this->dbcon->prepare($query);
+            $executed = $stmt->execute([
+                "catigorYid" => $catigorYid
+            ]);
+
+            if ($executed) {
+                return json_encode(["status" => 1, "message" => "Category deleted successfully"]);
+            } else {
+                return json_encode(["status" => 0, "error" => "Failed to delete category"]);
+            }
+        } catch (PDOException $e) {
+            return json_encode(["status" => 0, "error" => $e->getMessage()]);
+        }
+    }
 }
 ?>
