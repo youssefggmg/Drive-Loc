@@ -43,6 +43,67 @@ class vehicul
             die("ther is an error <br>" . $e->getMessage());
         }
     }
+    public function addMultiple()
+{
+    $primeSQuery = "SELECT vehiclesName FROM vehicles WHERE vehiclesName = :Vname";
+    try {
+        for ($i = 0; $i < $_POST["maxlength"]; $i++) {
+            $this->Carname = $_POST["Vname" . $i];
+            $this->CarColor = $_POST["carColor" . $i];
+            $this->CarType = $_POST["cartype" . $i];
+            $this->CarPrice = $_POST["carPrise" . $i];
+            $this->catigory = $_POST["catigoryID" . $i];
+            $this->CarImage = $_POST["carImage" . $i];
+            
+            $stmt = $this->dbcon->prepare($primeSQuery);
+            $stmt->execute([
+                "Vname" => $this->Carname
+            ]);
+            $exist = $stmt->fetch();
+            
+            if ($exist) {
+                echo json_encode(["status" => 0, "error" => "This car already exists."]);
+                exit; 
+            }
+        }
+
+        for ($i = 0; $i < $_POST["maxlength"]; $i++) {
+            $this->Carname = $_POST["Vname" . $i];
+            $this->CarColor = $_POST["carColor" . $i];
+            $this->CarType = $_POST["cartype" . $i];
+            $this->CarPrice = $_POST["carPrise" . $i];
+            $this->catigory = $_POST["catigoryID" . $i];
+            $this->CarImage = $_POST["carImage" . $i];
+            
+            $INSERTQuery = "INSERT INTO vehicles(vehiclesName,vehiclesColor,vehiclestype,vehiculImage,rent,catigorYid) 
+                            VALUES (:name, :color, :type, :image, :rent, :id)";
+            $stmt = $this->dbcon->prepare($INSERTQuery);
+            $executed = $stmt->execute([
+                "name"  => $this->Carname,
+                "color" => $this->CarColor,
+                "type"  => $this->CarType,
+                "image" => $this->CarImage,
+                "rent"  => $this->CarPrice,
+                "id"    => $this->catigory
+            ]);
+            
+            if (!$executed) {
+                echo json_encode(["status" => 0, "error" => "Something went wrong while adding vehicles."]);
+                exit;
+            }
+        }
+
+        // Success response
+        echo json_encode(["status" => 1, "message" => "All vehicles were added successfully."]);
+        exit;
+
+    } catch (PDOException $e) {
+        // Error response
+        echo json_encode(["status" => 0, "error" => "Database error: " . $e->getMessage()]);
+        exit;
+    }
+}
+
     public function updateVehicul()
     {
         $this->CarID = $_POST["CID"] ?? null;
@@ -103,6 +164,47 @@ class vehicul
             }
         } catch (PDOException $e) {
             return ["status" => 0, "error" => $e->getMessage()];
+        }
+    }
+    public function deleteVehicul()
+    {
+        try {
+            $this->CarID = $_POST["CID"];
+            $query = "DELETE FROM vehicles where vehiclesID = :id";
+            $stmt = $this->dbcon->prepare($query);
+            $stmt->execute([
+                "id" => $this->CarID
+            ]);
+        } catch (PDOException $e) {
+            die("there is an error " . $e->getMessage());
+        }
+    }
+    public function allVehiculs()
+    {
+        $query = "SELECT * FROM vehicles ";
+        try {
+            $stmt = $this->dbcon->query($query);
+            $allVehicules = $stmt->fetchAll();
+            $result = ["status" => 0, "allVehicules" => $allVehicules];
+            return $result;
+        } catch (PDOException $e) {
+            return ["status" => 0, "error" => $e->getMessage()];
+        }
+    }
+    public function singleVehicul()
+    {
+        try {
+            $vId = $_POST["VID"];
+            $query = "SELECT * FROM vehicles WHERE vehiclesID=:id";
+            $stmt = $this->dbcon->prepare($query);
+            $executed = $stmt->execute([
+                "id" => $vId
+            ]);
+            if ($executed) {
+                return ["status" => 1, "result" => $executed->fetchAll()];
+            }
+        } catch (PDOException $e) {
+            die("error" . $e->getMessage());
         }
     }
 }
