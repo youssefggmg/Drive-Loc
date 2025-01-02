@@ -75,5 +75,25 @@ class Catigory {
             return json_encode(["status" => 0, "error" => $e->getMessage()]);
         }
     }
+    public function getAllCategories()
+    {
+        $query = "SELECT * FROM catigory";
+
+        try {
+            // Prepare and execute the query
+            $stmt = $this->dbcon->prepare($query);
+            $stmt->execute();
+
+            $categories = $stmt->fetchAll();
+
+            if ($categories) {
+                return json_encode(["status" => 1, "categories" => $categories]);
+            } else {
+                return json_encode(["status" => 0, "message" => "No categories found"]);
+            }
+        } catch (PDOException $e) {
+            return json_encode(["status" => 0, "error" => $e->getMessage()]);
+        }
+    }
 }
 ?>
