@@ -29,6 +29,30 @@ class Catigory {
         }
     }
 
+    public function editCategory()
+    {
+        $query = "UPDATE catigory SET catigoryName = :catigoryName WHERE catigorYid = :catigorYid";
+
+        try {
+            $catigorYid = $_POST["catigorYid"];
+            $catigoryName = $_POST["catigoryName"];
+
+            $stmt = $this->dbcon->prepare($query);
+            $executed = $stmt->execute([
+                "catigorYid" => $catigorYid,
+                "catigoryName" => $catigoryName
+            ]);
+
+            if ($executed) {
+                return json_encode(["status" => 1, "message" => "Category updated successfully"]);
+            } else {
+                return json_encode(["status" => 0, "error" => "Failed to update category"]);
+            }
+        } catch (PDOException $e) {
+            return json_encode(["status" => 0, "error" => $e->getMessage()]);
+        }
+    }
+
     
 }
 ?>
