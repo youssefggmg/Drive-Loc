@@ -30,7 +30,7 @@
 					<img src="images/img-01.png" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form" method="POST" action="">
+				<form class="login100-form validate-form" method="POST" action="./controllers/login.php">
 					<span class="login100-form-title">
 						Member Login
 					</span>
@@ -42,9 +42,8 @@
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 						</span>
 					</div>
-
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" required placeholder="Password">
+						<input class="input100" type="password" name="password" required placeholder="Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>

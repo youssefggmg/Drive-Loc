@@ -60,10 +60,11 @@ class AUTH
         $stmt->bindParam(':email', $this->email);
         $stmt->execute();
         $exist = $stmt->fetch();
+        var_dump($exist);
 
         if ($exist) {
             $isIdentical = password_verify($this->password, $exist["password"]);
-
+            
             if ($isIdentical) {
                 return [
                     "status" => 1,
