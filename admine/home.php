@@ -35,20 +35,19 @@ include "../middleware/isAdmin.php"
 
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" href="home.html">Car<span>Book</span></a>
+      <a class="navbar-brand" href="home.php">Car<span>Book</span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active"><a href="home.html" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-          <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-          <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
-          <li class="nav-item"><a href="car.html" class="nav-link">Cars</a></li>
-          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+          <li class="nav-item active"><a href="home.php" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="services.php" class="nav-link">Services</a></li>
+          <li class="nav-item"><a href="pricing.php" class="nav-link">Pricing</a></li>
+          <li class="nav-item"><a href="car.php" class="nav-link">Cars</a></li>
+          <li class="nav-item"><a href="blog.php" class="nav-link">Blog</a></li>
+          <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -63,93 +62,11 @@ include "../middleware/isAdmin.php"
           <div class="text w-100 text-center mb-md-5 pb-md-5">
             <h1 class="mb-4">Fast &amp; Easy Way To Rent A Car</h1>
             <p style="font-size: 18px;">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts</p>
-            <a href="https://vimeo.com/45830194" class="icon-wrap popup-vimeo d-flex align-items-center mt-4 justify-content-center">
-              <div class="icon d-flex align-items-center justify-content-center">
-                <span class="ion-ios-play"></span>
-              </div>
-              <div class="heading-title ml-5">
-                <span>Easy steps for renting a car</span>
-              </div>
-            </a>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <section class="ftco-section ftco-no-pt bg-light">
-    <div class="container">
-      <div class="row no-gutters">
-        <div class="col-md-12	featured-top">
-          <div class="row no-gutters">
-            <div class="col-md-4 d-flex align-items-center">
-              <form action="#" class="request-form ftco-animate bg-primary">
-                <h2>Make your trip</h2>
-                <div class="form-group">
-                  <label for="" class="label">Pick-up location</label>
-                  <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-                </div>
-                <div class="form-group">
-                  <label for="" class="label">Drop-off location</label>
-                  <input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-                </div>
-                <div class="d-flex">
-                  <div class="form-group mr-2">
-                    <label for="" class="label">Pick-up date</label>
-                    <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
-                  </div>
-                  <div class="form-group ml-2">
-                    <label for="" class="label">Drop-off date</label>
-                    <input type="text" class="form-control" id="book_off_date" placeholder="Date">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="" class="label">Pick-up time</label>
-                  <input type="text" class="form-control" id="time_pick" placeholder="Time">
-                </div>
-                <div class="form-group">
-                  <input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
-                </div>
-              </form>
-            </div>
-            <div class="col-md-8 d-flex align-items-center">
-              <div class="services-wrap rounded-right w-100">
-                <h3 class="heading-section mb-4">Better Way to Rent Your Perfect Cars</h3>
-                <div class="row d-flex mb-4">
-                  <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-                    <div class="services w-100 text-center">
-                      <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
-                      <div class="text w-100">
-                        <h3 class="heading mb-2">Choose Your Pickup Location</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-                    <div class="services w-100 text-center">
-                      <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-handshake"></span></div>
-                      <div class="text w-100">
-                        <h3 class="heading mb-2">Select the Best Deal</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-                    <div class="services w-100 text-center">
-                      <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-rent"></span></div>
-                      <div class="text w-100">
-                        <h3 class="heading mb-2">Reserve Your Rental Car</h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <p><a href="#" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  </section>
-
-
   <section class="ftco-section ftco-no-pt bg-light">
     <div class="container">
       <div class="row justify-content-center">
@@ -387,7 +304,7 @@ include "../middleware/isAdmin.php"
       <div class="row d-flex">
         <div class="col-md-4 d-flex ftco-animate">
           <div class="blog-entry justify-content-end">
-            <a href="blog-single.html" class="block-20" style="background-image: url('images/image_1.jpg');">
+            <a href="blog-single.php" class="block-20" style="background-image: url('images/image_1.jpg');">
             </a>
             <div class="text pt-4">
               <div class="meta mb-3">
@@ -402,7 +319,7 @@ include "../middleware/isAdmin.php"
         </div>
         <div class="col-md-4 d-flex ftco-animate">
           <div class="blog-entry justify-content-end">
-            <a href="blog-single.html" class="block-20" style="background-image: url('images/image_2.jpg');">
+            <a href="blog-single.php" class="block-20" style="background-image: url('images/image_2.jpg');">
             </a>
             <div class="text pt-4">
               <div class="meta mb-3">
@@ -417,7 +334,7 @@ include "../middleware/isAdmin.php"
         </div>
         <div class="col-md-4 d-flex ftco-animate">
           <div class="blog-entry">
-            <a href="blog-single.html" class="block-20" style="background-image: url('images/image_3.jpg');">
+            <a href="blog-single.php" class="block-20" style="background-image: url('images/image_3.jpg');">
             </a>
             <div class="text pt-4">
               <div class="meta mb-3">

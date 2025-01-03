@@ -11,10 +11,10 @@ class roleValidation{
     }
     public function isUser(){
         $this->role= $_COOKIE["ROLE"];
-        if ($this->role!=1) {
+        if ($this->role!=2) {
             // readirect to the loge in page ;
             $message= "you do not have the privalige to get to this page ";
-            header("location: index.php?message=".$message);
+            header("location: ../index.php?message=".$message);
         }
     }
 }
