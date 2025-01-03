@@ -55,6 +55,14 @@
 							Login
 						</button>
 					</div>
+					<?php
+					if (isset($_GET['message'])) {
+						echo "<div style='color: #D8000C; background-color: #FFD2D2; border: 1px solid #D8000C; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 14px; margin: 10px 0; display: flex; align-items: center; gap: 8px;'>
+									⚠️". $_GET['message']."
+							</div>
+	";
+					}
+					?>
 
 					<div class="text-center p-t-136">
 						<a class="txt2" href="./sign.php">

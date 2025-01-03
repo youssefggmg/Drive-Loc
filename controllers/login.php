@@ -9,7 +9,7 @@ if ($result["status"]=0) {
 if ($result["status"]=1) {
     echo $result["status"];
     setcookie("userID", $result['ID'], time() + 3600,"/");
-    setcookie("roleID", $result['role'], time() + 3600,"/");
+    setcookie("ROLE", $result['role'], time() + 3600,"/");
     if ($result['role']=2) {
         header("location: ../client/home.php");
     }else{

@@ -6,7 +6,7 @@ class roleValidation{
         if ($this->role!=1) {
             // readirect to the loge in page ;
             $message= "you do not have the privalige to get to this page ";
-            header("location: ".$message);
+            header("location: ../index.php?message=".$message);
         }
     }
     public function isUser(){
@@ -14,7 +14,7 @@ class roleValidation{
         if ($this->role!=1) {
             // readirect to the loge in page ;
             $message= "you do not have the privalige to get to this page ";
-            header("location: ".$message);
+            header("location: index.php?message=".$message);
         }
     }
 }

@@ -1,3 +1,6 @@
+<?php
+include "../middleware/isClient.php"
+?>
 <!DOCTYPE html>
 <html lang="en">
 

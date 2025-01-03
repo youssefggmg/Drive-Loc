@@ -8,7 +8,7 @@ if ($result["status"]=0) {
 }
 if ($result["status"]=1) {
     setcookie("userID", $result['index'], time() + 3600,"/");
-    setcookie("roleID", $result['role'], time() + 3600,"/");
+    setcookie("ROLE", $result['role'], time() + 3600,"/");
     header("location: ../client/home.php");
 }
 ?>

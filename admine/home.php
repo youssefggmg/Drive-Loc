@@ -1,3 +1,6 @@
+<?php
+include "../middleware/isAdmin.php"
+?>
 <!DOCTYPE html>
 <html lang="en">
 
