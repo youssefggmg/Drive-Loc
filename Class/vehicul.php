@@ -181,12 +181,13 @@ class vehicul
     public function deleteVehicul()
     {
         try {
-            $this->CarID = $_POST["CID"];
+            $this->CarID = $_GET["CID"];
             $query = "DELETE FROM vehicles where vehiclesID = :id";
             $stmt = $this->dbcon->prepare($query);
             $stmt->execute([
                 "id" => $this->CarID
             ]);
+            return ["status" => 1, "message" => "Vehicle deleted successfully."];
         } catch (PDOException $e) {
             die("there is an error " . $e->getMessage());
         }
@@ -200,7 +201,7 @@ class vehicul
             $stmt->bindValue(":offset", (int)$offset, PDO::PARAM_INT);
             $stmt->bindValue(":limit", (int)$this->lignes_par_page, PDO::PARAM_INT);
             $stmt->execute();
-            $allVehicules = $stmt->fetchAll();
+            $allVehicules = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $result = ["status" => 1, "allVehicules" => $allVehicules];
             return $result;
         } catch (PDOException $e) {
