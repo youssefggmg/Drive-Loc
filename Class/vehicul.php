@@ -211,14 +211,14 @@ class vehicul
     public function singleVehicul()
     {
         try {
-            $vId = $_POST["VID"];
+            $vId = $_GET["VID"];
             $query = "SELECT * FROM vehicles WHERE vehiclesID=:id";
             $stmt = $this->dbcon->prepare($query);
             $executed = $stmt->execute([
                 "id" => $vId
             ]);
             if ($executed) {
-                return ["status" => 1, "result" => $executed->fetchAll()];
+                return ["status" => 1, "result" => $stmt->fetchAll()];
             }
         } catch (PDOException $e) {
             die("error" . $e->getMessage());

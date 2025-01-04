@@ -20,9 +20,9 @@ class Catigory {
             ]);
 
             if ($executed) {
-                return json_encode(["status" => 1, "message" => "Category added successfully"]);
+                return ["status" => 1, "message" => "Category added successfully"];
             } else {
-                return json_encode(["status" => 0, "error" => "Failed to add category"]);
+                return ["status" => 0, "error" => "Failed to add category"];
             }
         } catch (PDOException $e) {
             return json_encode(["status" => 0, "error" => $e->getMessage()]);
@@ -87,12 +87,12 @@ class Catigory {
             $categories = $stmt->fetchAll();
 
             if ($categories) {
-                return json_encode(["status" => 1, "categories" => $categories]);
+                return ["status" => 1, "categories" => $categories];
             } else {
-                return json_encode(["status" => 0, "message" => "No categories found"]);
+                return ["status" => 0, "message" => "No categories found"];
             }
         } catch (PDOException $e) {
-            return json_encode(["status" => 0, "error" => $e->getMessage()]);
+            return ["status" => 0, "error" => $e->getMessage()];
         }
     }
 }

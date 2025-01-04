@@ -1,6 +1,9 @@
 <?php
 include "../Class/vehicul.php";
 include "../instance/instace.php";
+include "../Class/roleValidation.php";
+$roleValidation= new roleValidation();
+$roleValidation->isAdmine();
 $vehicul = new vehicul($pdo);
 if (isset($_GET['page'])) {
 	$page = $_GET['page'];
@@ -58,7 +61,6 @@ $allcars = $vehicul->allVehiculs($page);
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
 					<li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
 					<li class="nav-item active"><a href="car.html" class="nav-link">Cars</a></li>
@@ -102,8 +104,8 @@ $allcars = $vehicul->allVehiculs($page);
                     <span class='cat'>" . $car['vehiclestype'] . "</span>
                     <p class='price ml-auto'>" . $car['rent'] . "<span>/day</span></p>
                 </div>
-                <p class='d-flex mb-0 d-block'><a href='#' class='btn btn-primary py-2 mr-1'>edit</a>
-                    <a href='../controllers/deleteCars.php?CID=".$car['vehiclesID']."' class='btn btn-secondary py-2 ml-1'>delete</a>
+                <p class='d-flex mb-0 d-block'><a href='editCar.php?VID=".$car['vehiclesID']."' class='btn btn-primary py-2 mr-1'>edit</a>
+                    <a href='../controllers/deleteCars.php?VID=".$car['vehiclesID']."' class='btn btn-secondary py-2 ml-1'>delete</a>
                 </p>
             </div>
         </div>
