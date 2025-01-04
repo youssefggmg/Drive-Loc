@@ -1,3 +1,20 @@
+<?php
+include "../Class/vehicul.php" ;
+INCLUDE "../instance/instace.php";
+$vehicul = new vehicul($pdo);
+if (isset($_GET['page'])) {
+	$page = $_GET['page'];
+}else{
+	$page = 1;
+}
+
+$totalRows=$vehicul->totleCars() ;
+$rowsPerPage= 5;
+$totalPages = ceil($totalRows / $rowsPerPage);
+$allcars=$vehicul->allVehiculs($page);
+var_dump($allcars)
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -273,13 +290,9 @@
 				<div class="col text-center">
 					<div class="block-27">
 						<ul>
-							<li><a href="#">&lt;</a></li>
-							<li class="active"><span>1</span></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&gt;</a></li>
+						<?php for($i=1; $i <= $totalPages; $i++): ?>
+							<li ><a href="?page=<?=$i?>"><?=$i?></a></li>
+							<?php endfor;?>
 						</ul>
 					</div>
 				</div>

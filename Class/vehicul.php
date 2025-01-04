@@ -9,10 +9,22 @@ class vehicul
     private $catigory = "";
     private $CarImage = "";
     private $CarID = "";
-
+    private $lignes_par_page = 4;
+    
     public function __construct($dbcon)
     {
         $this->dbcon = $dbcon;
+    }
+    public function getLinesParPage()
+    {
+        return $this->lignes_par_page;
+    }
+    public function totleCars (){
+        $sql = "SELECT COUNT(*) as total FROM `vehicles`";
+        $stmt = $this->dbcon->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['total'];
     }
     public function addVehicul()
     {
@@ -179,16 +191,20 @@ class vehicul
             die("there is an error " . $e->getMessage());
         }
     }
-    public function allVehiculs()
+    public function allVehiculs($page)
     {
-        $query = "SELECT * FROM vehicles ";
+        $query = "SELECT * FROM vehicles LIMIT :offset,:limit ";
         try {
-            $stmt = $this->dbcon->query($query);
+            $offset= ($page-1) * $this->lignes_par_page;
+            $stmt = $this->dbcon->prepare($query);
+            $stmt->bindValue(":offset", (int)$offset, PDO::PARAM_INT);
+            $stmt->bindValue(":limit", (int)$this->lignes_par_page, PDO::PARAM_INT);
+            $stmt->execute();
             $allVehicules = $stmt->fetchAll();
-            $result = ["status" => 0, "allVehicules" => $allVehicules];
+            $result = ["status" => 1, "allVehicules" => $allVehicules];
             return $result;
         } catch (PDOException $e) {
-            return ["status" => 0, "error" => $e->getMessage()];
+            return ["status" => 0, "error" => "pdo error </br>". $e->getMessage()];
         }
     }
     public function singleVehicul()
