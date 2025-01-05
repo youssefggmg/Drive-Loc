@@ -114,6 +114,43 @@ class Reservation
             return ["status" => 0, "error" => $e->getMessage()];
         }
     }
+    public function getSingleReservation($reservationID)
+    {
+        $query = "SELECT 
+                    v.vehiclesID, 
+                    v.vehiclesName, 
+                    v.vehiclesColor, 
+                    v.vehiclestype, 
+                    v.rent, 
+                    v.vehiculImage, 
+                    v.catigorYid, 
+                    r.reservationID, 
+                    r.startdate, 
+                    r.endDate, 
+                    r.status AS reservation_status, 
+                    r.placeID, 
+                    r.userID
+                    FROM vehicles v, reservation r
+                    WHERE v.vehiclesID = r.vehiculID
+                    AND r.reservationID = :reservationID";
+
+        try {
+            $stmt = $this->dbcon->prepare($query);
+            $stmt->execute(["reservationID" => $reservationID]);
+
+            // Fetch single result
+            $reservation = $stmt->fetch();
+
+            // Return result
+            if ($reservation) {
+                return ["status" => 1, "data" => $reservation];
+            } else {
+                return ["status" => 0, "message" => "No reservation found with this ID."];
+            }
+        } catch (PDOException $e) {
+            return ["status" => 0, "error" => $e->getMessage()];
+        }
+    }
 
 }
 ?>

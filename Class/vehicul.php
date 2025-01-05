@@ -75,8 +75,8 @@ class vehicul
                 $exist = $stmt->fetch();
 
                 if ($exist) {
-                    echo json_encode(["status" => 0, "error" => "This car already exists."]);
-                    exit;
+                    return ["status" => 0, "error" => "This car already exists."];
+
                 }
             }
 
@@ -101,19 +101,16 @@ class vehicul
                 ]);
 
                 if (!$executed) {
-                    echo json_encode(["status" => 0, "error" => "Something went wrong while adding vehicles."]);
-                    exit;
+                    return ["status" => 0, "error" => "Something went wrong while adding vehicles."];
                 }
             }
 
             // Success response
-            echo json_encode(["status" => 1, "message" => "All vehicles were added successfully."]);
-            exit;
+            return ["status" => 1, "message" => "All vehicles were added successfully."];
 
         } catch (PDOException $e) {
             // Error response
-            echo json_encode(["status" => 0, "error" => "Database error: " . $e->getMessage()]);
-            exit;
+            return ["status" => 0, "error" => "Database error: " . $e->getMessage()];
         }
     }
 
