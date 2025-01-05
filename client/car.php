@@ -105,7 +105,7 @@ $allcars = $vehicul->allVehiculs($page);
                     <p class='price ml-auto'>" . $car['rent'] . "<span>/day</span></p>
                 </div>
                 <p class='d-flex mb-0 d-block'><a href='car-single.php?VID=" . $car['vehiclesID'] . "' class='btn btn-primary py-2 mr-1'>details</a>
-                    <a href='../controllers/deleteCars.php?VID=" . $car['vehiclesID'] . "' class='btn btn-secondary py-2 ml-1'>book</a>
+                    <a href='reservation.php?VID=" . $car['vehiclesID'] . "' class='btn btn-secondary py-2 ml-1'>book</a>
                 </p>
             </div>
         </div>

@@ -89,7 +89,7 @@ $myrate = $rate->getMyReview($_COOKIE["userID"], $_GET["VID"]);
 			<div class="row mt-5">
 				<div class="col-md-8 offset-md-2">
 					<h3 class="mb-4">Add Your Review</h3>
-					<form method="POST" action="../controllers/">
+					<form method="POST" action="../controllers/addrating.php">
 						<div class="form-group">
 							<label for="rating">Rating (1-5)</label>
 							<input type="number" name="user_id" hidden value="<?php echo $_COOKIE["userID"]; ?>">
