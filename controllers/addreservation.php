@@ -2,5 +2,8 @@
 include "../Class/reservation.php";
 include "../instance/instace.php";
 $reservation = new Reservation($pdo);
-$reservation->addReservation();
+$reservations = $reservation->addReservation();
+if ($reservations["status"] == 1 ) {
+    header("location: ../client/car.php");
+}
 ?>

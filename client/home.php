@@ -1,8 +1,7 @@
 <?php
 include "../middleware/isClient.php";
-echo $_COOKIE["ROLE"];
 ?>
-<!DOCTYPE.php>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -44,7 +43,7 @@ echo $_COOKIE["ROLE"];
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active"><a href="home.php" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="services.php" class="nav-link">Services</a></li>
+          <li class="nav-item"><a href="myReservations.php" class="nav-link">MyReservation</a></li>
           <li class="nav-item"><a href="pricing.php" class="nav-link">Pricing</a></li>
           <li class="nav-item"><a href="car.php" class="nav-link">Cars</a></li>
           <li class="nav-item"><a href="blog.php" class="nav-link">Blog</a></li>

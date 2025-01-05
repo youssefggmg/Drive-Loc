@@ -35,12 +35,12 @@ class Reservation
             ]);
             // Return JSON response
             if ($executed) {
-                return json_encode(["status" => 1, "message" => "Reservation added successfully"]);
+                return ["status" => 1, "message" => "Reservation added successfully"];
             } else {
-                return json_encode(["status" => 0, "error" => "Failed to add reservation"]);
+                return ["status" => 0, "error" => "Failed to add reservation"];
             }
         } catch (PDOException $e) {
-            return json_encode(["status" => 0, "error" => $e->getMessage()]);
+            return ["status" => 0, "error" => $e->getMessage()];
         }
     }
     public function editReservation()
@@ -48,7 +48,6 @@ class Reservation
         $query = "UPDATE reservation 
                   SET startdate = :startdate, endDate = :endDate, placeID = :placeID, vehiculID = :vehiculID, userID = :userID 
                   WHERE id = :id";
-
         try {
             // Get user inputs
             $this->id = $_POST["id"];
@@ -76,6 +75,43 @@ class Reservation
             }
         } catch (PDOException $e) {
             return json_encode(["status" => 0, "error" => $e->getMessage()]);
+        }
+    }
+    public function getReservationDetails($userID)
+    {
+        $query = "SELECT 
+                    v.vehiclesID, 
+                    v.vehiclesName, 
+                    v.vehiclesColor, 
+                    v.vehiclestype, 
+                    v.rent, 
+                    v.vehiculImage, 
+                    v.catigorYid, 
+                    r.reservationID, 
+                    r.startdate, 
+                    r.endDate, 
+                    r.status AS reservation_status, 
+                    r.placeID, 
+                    r.userID
+                    FROM vehicles v, reservation r
+                    WHERE v.vehiclesID = r.vehiculID
+                    AND r.userID =  :userID";
+
+        try {
+            $stmt = $this->dbcon->prepare($query);
+            $stmt->execute(["userID" => $userID]);
+
+            // Fetch all results
+            $reservations = $stmt->fetchAll();
+
+            // Return results
+            if ($reservations) {
+                return ["status" => 1, "data" => $reservations];
+            } else {
+                return ["status" => 0, "message" => "No reservations found for this user."];
+            }
+        } catch (PDOException $e) {
+            return ["status" => 0, "error" => $e->getMessage()];
         }
     }
 
