@@ -15,7 +15,7 @@ class Reservation
     public function addReservation()
     {
         $query = "INSERT INTO reservation (startdate, endDate, placeID, vehiculID, userID) 
-                  VALUES (:startdate, :endDate, :placeID, :vehiculID, :userID)";
+                VALUES (:startdate, :endDate, :placeID, :vehiculID, :userID)";
         try {
             // Get user inputs
             $this->startdate = $_POST["startdate"];

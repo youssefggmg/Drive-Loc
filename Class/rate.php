@@ -13,9 +13,9 @@ class rate
 
     public function createRating()
     {
-        $this->userID = intval($_POST['user_id'] ?? 0);
-        $this->carID = intval($_POST['car_id'] ?? 0);
-        $this->rating = intval($_POST['rating'] ?? 0);
+        $this->userID = intval($_POST['user_id'] ?? "");
+        $this->carID = intval($_POST['car_id'] ?? "");
+        $this->rating = intval($_POST['rating'] ?? "");
 
         // Check if the rating already exists
         $selectQ = "SELECT * FROM reservation WHERE userID = :userID AND vehiculID = :carID";

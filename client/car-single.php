@@ -89,9 +89,11 @@ $myrate = $rate->getMyReview($_COOKIE["userID"], $_GET["VID"]);
 			<div class="row mt-5">
 				<div class="col-md-8 offset-md-2">
 					<h3 class="mb-4">Add Your Review</h3>
-					<form method="POST" action="submit_review.php">
+					<form method="POST" action="../controllers/">
 						<div class="form-group">
 							<label for="rating">Rating (1-5)</label>
+							<input type="number" name="user_id" hidden value="<?php echo $_COOKIE["userID"]; ?>">
+							<input type="number" name="car_id" hidden value="<?php echo $_GET["VID"]; ?>">
 							<input type="number" class="form-control" id="rating" name="rating" min="1" max="5"
 								required>
 						</div>
@@ -104,10 +106,10 @@ $myrate = $rate->getMyReview($_COOKIE["userID"], $_GET["VID"]);
 					<div class="mt-4">
 						<h4>Your Rating:</h4>
 						<?php 
-						if ($myrate['status']==0){
+						if ($myrate['status']==1){
 							echo  "<p id='rating-display'>No rating submitted yet.</p>";
 						}else{
-							echo  "<p id='rating-display'>".$myrate["message"]."</p>";
+							echo  "<p id='rating-display'>".$myrate["message"]."/5</p>";
 						}
 						?>
 					</div>
