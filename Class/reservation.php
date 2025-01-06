@@ -146,6 +146,21 @@ class Reservation
             return ["status" => 0, "error" => $e->getMessage()];
         }
     }
+    public function deleteReservation($reservationID){
+        $query = "DELETE FROM reservation WHERE reservationID = :reservationID";
+        try {
+            $stmt = $this->dbcon->prepare($query);
+            $executed = $stmt->execute(["reservationID" => $reservationID]);
+
+            if ($executed) {
+                return ["status" => 1, "message" => "Reservation deleted successfully"];
+            } else {
+                return ["status" => 0, "error" => "Failed to delete reservation"];
+            }
+        } catch (PDOException $e) {
+            return ["status" => 0, "error" => $e->getMessage()];
+        }
+    }
 
 }
 ?>
