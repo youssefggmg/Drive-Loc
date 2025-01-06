@@ -46,7 +46,7 @@ class Reservation
     public function editReservation()
     {
         $query = "UPDATE reservation 
-                  SET startdate = :startdate, endDate = :endDate, placeID = :placeID, vehiculID = :vehiculID, userID = :userID 
+                  SET startdate = :startdate, endDate = :endDate, placeID = :placeID
                   WHERE id = :id";
         try {
             // Get user inputs
@@ -54,8 +54,6 @@ class Reservation
             $this->startdate = $_POST["startdate"];
             $this->enddate = $_POST["endDate"];
             $this->place = $_POST["placeID"];
-            $this->vehicul = $_POST["vehiculID"];
-            $this->userID = $_POST["userID"];
 
             // Prepare and execute the query
             $stmt = $this->dbcon->prepare($query);
@@ -63,18 +61,15 @@ class Reservation
                 "id" => $this->id,
                 "startdate" => $this->startdate,
                 "endDate" => $this->enddate,
-                "placeID" => $this->place,
-                "vehiculID" => $this->vehicul,
-                "userID" => $this->userID
             ]);
             // Return JSON response
             if ($executed) {
-                return json_encode(["status" => 1, "message" => "Reservation updated successfully"]);
+                return ["status" => 1, "message" => "Reservation updated successfully"];
             } else {
-                return json_encode(["status" => 0, "error" => "Failed to update reservation"]);
+                return ["status" => 0, "error" => "Failed to update reservation"];
             }
         } catch (PDOException $e) {
-            return json_encode(["status" => 0, "error" => $e->getMessage()]);
+            return ["status" => 0, "error" => $e->getMessage()];
         }
     }
     public function getReservationDetails($userID)
