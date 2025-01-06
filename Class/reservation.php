@@ -5,6 +5,7 @@ class Reservation
     private $startdate;
     private $enddate;
     private $place;
+    private $status;
     private $userID;
     private $vehicul;
     private $dbcon;
@@ -72,6 +73,29 @@ class Reservation
             return ["status" => 0, "error" => $e->getMessage()];
         }
     }
+    public function updateReservationStatus()
+    {
+        $query = "UPDATE reservation SET status = :status WHERE reservationID = :id";
+        try {
+            $this->id = $_GET["id"];
+            $this->status = $_GET["status"];
+
+            $stmt = $this->dbcon->prepare($query);
+            $executed = $stmt->execute([
+                "id" => $this->id,
+                "status" => $this->status,
+            ]);
+
+            if ($executed) {
+                return ["status" => 1, "message" => "Reservation status updated successfully"];
+            } else {
+                return ["status" => 0, "message" => "Failed to update reservation status"];
+            }
+        } catch (PDOException $e) {
+            return ["status" => 0, "error" => $e->getMessage()];
+        }
+    }
+
     public function getReservationDetails($userID)
     {
         $query = "SELECT 
@@ -182,7 +206,8 @@ class Reservation
             return ["status" => 0, "error" => $e->getMessage()];
         }
     }
-    public function deleteReservation($reservationID){
+    public function deleteReservation($reservationID)
+    {
         $query = "DELETE FROM reservation WHERE reservationID = :reservationID";
         try {
             $stmt = $this->dbcon->prepare($query);
