@@ -222,4 +222,45 @@ class vehicul
             die("error" . $e->getMessage());
         }
     }
+    public function filteredCars()
+{
+    // Validate and sanitize input to prevent any issues with the query
+    $categoryName = isset($_GET['name']) ? $_GET['name'] : null;
+
+    if ($categoryName === null) {
+        echo json_encode(['error' => 'Category name is required']);
+        exit;
+    }
+
+    $query = "SELECT catigorYid FROM catigory WHERE catigoryName = :name LIMIT 1";
+    
+    try {
+        $stmt = $this->dbcon->prepare($query);
+        $stmt->execute(['name' => $categoryName]);
+
+        $category = $stmt->fetch();
+
+        if (!$category) {
+            echo json_encode(['error' => 'Category not found']);
+            exit;
+        }
+
+        $categoryId = $category['catigorYid'];
+
+        $query = "SELECT * FROM vehicles WHERE catigorYid = :categoryId";
+        $stmt = $this->dbcon->prepare($query);
+        $stmt->execute(['categoryId' => $categoryId]);
+
+
+        $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+        echo json_encode($vehicles);
+        exit;
+    } catch (PDOException $e) {
+        echo json_encode(['error' => 'An error occurred, please try again later']);
+        exit;
+    }
+}
+
 }

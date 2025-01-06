@@ -2,9 +2,13 @@
 include "../Class/vehicul.php";
 include "../instance/instace.php";
 include "../Class/roleValidation.php";
+include "../Class/catigory.php";
+
 $roleValidation = new roleValidation();
 $roleValidation->isUser();
 $vehicul = new vehicul($pdo);
+$catigory = new catigory($pdo);
+$allcatigorys = $catigory->getAllCategories()["categories"];
 if (isset($_GET['page'])) {
 	$page = $_GET['page'];
 } else {
@@ -46,6 +50,7 @@ $allcars = $vehicul->allVehiculs($page);
 	<link rel="stylesheet" href="css/flaticon.css">
 	<link rel="stylesheet" href="css/icomoon.css">
 	<link rel="stylesheet" href="css/style.css">
+	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -89,8 +94,18 @@ $allcars = $vehicul->allVehiculs($page);
 
 
 	<section class="ftco-section bg-light">
+		<select id="categorySelect" name="categorySelect" onchange="changeContent(this)"
+			class="block w-40 p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none float-right ">
+			<?php
+			foreach ($allcatigorys as $catigory) {
+				echo "<option value='" . htmlspecialchars($catigory["catigoryName"]) . "'>" . htmlspecialchars($catigory["catigoryName"]) . "</option>";
+			}
+			?>
+		</select>
+
+
 		<div class="container">
-			<div class="row">
+			<div class="row" id="carsList">
 				<?php
 				foreach ($allcars['allVehicules'] as $car) {
 					echo "<div class='col-md-4'>
@@ -227,6 +242,36 @@ $allcars = $vehicul->allVehiculs($page);
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
+	<script>
+		const carsList = document.querySelector("#carsList");
+		async function changeContent(select) {
+			const theValue = select.value;
+			const data = await fetch(`../controllers/filteredcars.php?name=${theValue}`);
+			const response = await data.json();
+			carsList.innerHTML = "";
+			response.map((car) => {
+				console.log(car.vehiculImage);
+				
+				carsList.innerHTML += `<div class='col-md-4'>
+							<div class='car-wrap rounded ftco-animate'>
+								<div class='img rounded d-flex align-items-end'
+									style='background-image: url(  ${car.vehiculImage} );'>
+								</div>
+								<div class='text'>
+									<h2 class='mb-0'><a href='car-single.php'> fhsjkdfhjsdhfkjsdhfkjsdhf  </a></h2>
+									<div class='d-flex mb-3'>
+										<span class='cat'>  fhsjkdhfjksdhfkjs  </span>
+										<p class='price ml-auto'>  hfudhsfsduif  <span>/day</span></p>
+									</div>
+									<p class='d-flex mb-0 d-block'><a href='car-single.php?VID= ${car.vehiclesID}' class='btn btn-primary py-2 mr-1'>details</a>
+										<a href='reservation.php?VID=  ${car.vehiclesID}' class='btn btn-secondary py-2 ml-1'>book</a>
+									</p>
+								</div>
+							</div>
+						</div>`
+			})
+		}
+	</script>
 
 </body>
 
